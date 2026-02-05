@@ -30,7 +30,7 @@ header a{color:#fff;text-decoration:none}
 header h1{font-size:30px}
 header p{margin-top:6px;font-size:14px}
 
-/* NAV (DESKTOP CENTER) */
+/* NAV DESKTOP */
 nav{
     background:#fff;
     display:flex;
@@ -48,7 +48,7 @@ nav{
 }
 .nav-links a:hover{background:var(--light)}
 
-/* HAMBURGER (MOBILE) */
+/* MOBILE MENU BUTTON */
 .menu-btn{
     display:none;
     position:fixed;
@@ -59,36 +59,36 @@ nav{
     background:var(--secondary);
     color:#fff;
     border-radius:50%;
-    display:flex;
     align-items:center;
     justify-content:center;
     font-size:26px;
     cursor:pointer;
-    z-index:500;
+    z-index:120;
 }
 
 /* OVERLAY */
-#overlay{
+.overlay{
+    display:none;
     position:fixed;
     inset:0;
     background:rgba(0,0,0,.4);
-    display:none;
-    z-index:300;
+    z-index:80;
 }
-#overlay.active{display:block}
+.overlay.active{display:block}
 
 /* DRAWER */
 .drawer{
+    display:none;
     position:fixed;
     top:0;
     right:-260px;
     width:260px;
     height:100%;
     background:#fff;
-    box-shadow:-4px 0 12px rgba(0,0,0,.2);
+    box-shadow:-4px 0 12px rgba(0,0,0,.25);
     padding-top:80px;
     transition:.3s;
-    z-index:400;
+    z-index:100;
 }
 .drawer a{
     display:block;
@@ -152,7 +152,7 @@ footer{
     padding:15px;
 }
 
-/* FLOATING BUTTONS */
+/* FLOAT BUTTONS */
 .float-wrap{
     position:fixed;
     right:15px;
@@ -160,7 +160,7 @@ footer{
     display:flex;
     flex-direction:column;
     gap:10px;
-    z-index:200;
+    z-index:50;
 }
 .float-btn{
     display:flex;
@@ -183,6 +183,7 @@ footer{
 @media(max-width:600px){
     .nav-links{display:none}
     .menu-btn{display:flex}
+    .drawer{display:block}
     .services-grid{grid-template-columns:1fr}
     header h1{font-size:24px}
 }
@@ -206,10 +207,10 @@ footer{
     </div>
 </nav>
 
-<!-- MOBILE HAMBURGER -->
-<div class="menu-btn" onclick="toggleDrawer()">☰</div>
+<!-- MOBILE ONLY -->
+<div class="menu-btn" onclick="openDrawer()">☰</div>
 
-<div id="overlay" onclick="closeDrawer()"></div>
+<div class="overlay" id="overlay" onclick="closeDrawer()"></div>
 
 <div class="drawer" id="drawer">
     <a href="#about" onclick="closeDrawer()">About</a>
@@ -233,12 +234,12 @@ footer{
 <section id="services">
     <h2>Our Services</h2>
     <div class="services-grid">
-        <div class="service-card"><h3>MRI Scan</h3><p>High resolution MRI imaging.</p></div>
-        <div class="service-card"><h3>CT Scan</h3><p>Fast & accurate CT scans.</p></div>
-        <div class="service-card"><h3>Digital X-Ray</h3><p>Instant digital reports.</p></div>
-        <div class="service-card"><h3>Ultrasound</h3><p>Safe diagnostic imaging.</p></div>
-        <div class="service-card"><h3>Pathology</h3><p>Complete lab testing.</p></div>
-        <div class="service-card"><h3>Health Packages</h3><p>Preventive checkups.</p></div>
+        <div class="service-card"><h3>MRI Scan</h3></div>
+        <div class="service-card"><h3>CT Scan</h3></div>
+        <div class="service-card"><h3>Digital X-Ray</h3></div>
+        <div class="service-card"><h3>Ultrasound</h3></div>
+        <div class="service-card"><h3>Pathology</h3></div>
+        <div class="service-card"><h3>Health Packages</h3></div>
     </div>
 </section>
 
@@ -252,9 +253,7 @@ footer{
     </div>
 </section>
 
-<footer>
-    © 2026 Radiovision Diagnostic Centre
-</footer>
+<footer>© 2026 Radiovision Diagnostic Centre</footer>
 
 <div class="float-wrap">
     <a href="tel:+91XXXXXXXXXX" class="float-btn call">📞 Call Now</a>
@@ -262,7 +261,7 @@ footer{
 </div>
 
 <script>
-function toggleDrawer(){
+function openDrawer(){
     document.getElementById("drawer").classList.add("active");
     document.getElementById("overlay").classList.add("active");
 }
