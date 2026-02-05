@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-:root {
+:root{
     --primary:#0b5ed7;
     --secondary:#084298;
     --light:#f5f8ff;
@@ -33,33 +33,49 @@ header a{
 header h1{font-size:30px}
 header p{margin-top:6px;font-size:14px}
 
-/* NAV */
+/* NAV (DESKTOP CENTER) */
 nav{
     background:#fff;
     display:flex;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
-    padding:0 20px;
     box-shadow:0 2px 8px rgba(0,0,0,.08);
     position:sticky;
     top:0;
     z-index:20;
 }
 .nav-links a{
-    padding:14px 16px;
+    padding:14px 18px;
     text-decoration:none;
     color:var(--secondary);
     font-weight:600;
 }
 .nav-links a:hover{background:var(--light)}
 
-/* HAMBURGER */
+/* HAMBURGER (MOBILE ONLY) */
 .menu-btn{
     display:none;
-    font-size:26px;
-    cursor:pointer;
+    position:fixed;
+    top:18px;
+    right:18px;
+    font-size:28px;
     color:var(--secondary);
+    cursor:pointer;
+    z-index:300;
 }
+
+/* OVERLAY */
+#overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.4);
+    display:none;
+    z-index:90;
+}
+#overlay.active{display:block}
 
 /* DRAWER */
 .drawer{
@@ -70,7 +86,7 @@ nav{
     height:100%;
     background:#fff;
     box-shadow:-4px 0 12px rgba(0,0,0,.2);
-    padding-top:60px;
+    padding-top:70px;
     transition:.3s;
     z-index:100;
 }
@@ -183,7 +199,6 @@ footer{
 </header>
 
 <nav>
-    <div class="menu-btn" onclick="toggleDrawer()">☰</div>
     <div class="nav-links">
         <a href="#about">About</a>
         <a href="#services">Services</a>
@@ -191,11 +206,14 @@ footer{
     </div>
 </nav>
 
-<!-- DRAWER MENU -->
+<div class="menu-btn" onclick="toggleDrawer()">☰</div>
+
+<div id="overlay" onclick="closeDrawer()"></div>
+
 <div class="drawer" id="drawer">
-    <a href="#about" onclick="toggleDrawer()">About</a>
-    <a href="#services" onclick="toggleDrawer()">Services</a>
-    <a href="#contact" onclick="toggleDrawer()">Contact</a>
+    <a href="#about" onclick="closeDrawer()">About</a>
+    <a href="#services" onclick="closeDrawer()">Services</a>
+    <a href="#contact" onclick="closeDrawer()">Contact</a>
 </div>
 
 <div class="hero">
@@ -207,7 +225,8 @@ footer{
     <h2>About Radiovision</h2>
     <p style="text-align:center;max-width:900px;margin:auto">
         Radiovision Diagnostic Centre provides MRI, CT Scan, Digital X-Ray,
-        Ultrasound and Pathology services with focus on accuracy and patient care.
+        Ultrasound and Pathology services with a strong focus on accuracy
+        and patient-first care.
     </p>
 </section>
 
@@ -229,25 +248,4 @@ footer{
         <p><b>📍 Address:</b> Aundh, Pune</p>
         <p><b>📞 Phone:</b> +91-XXXXXXXXXX</p>
         <p><b>✉ Email:</b> info@radiovisiondiagnostics.com</p>
-        <p><b>⏰ Timing:</b> Mon–Sun | 8 AM – 12 AM</p>
-    </div>
-</section>
-
-<footer>
-    © 2026 Radiovision Diagnostic Centre
-</footer>
-
-<!-- FLOATING CALL & WHATSAPP -->
-<div class="float-wrap">
-    <a href="tel:+91XXXXXXXXXX" class="float-btn call">📞 Call Now</a>
-    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="float-btn whatsapp">💬 WhatsApp</a>
-</div>
-
-<script>
-function toggleDrawer(){
-    document.getElementById("drawer").classList.toggle("active");
-}
-</script>
-
-</body>
-</html>
+        <p><b>⏰ Timing:
