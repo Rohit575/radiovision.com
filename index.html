@@ -7,285 +7,247 @@
 
 <style>
 :root {
-    --primary: #0b5ed7;
-    --secondary: #084298;
-    --light: #f5f8ff;
-    --text: #333;
+    --primary:#0b5ed7;
+    --secondary:#084298;
+    --light:#f5f8ff;
+    --text:#333;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: var(--text);
-    background: #fff;
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    color:var(--text);
 }
 
 /* HEADER */
-header {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    color: #fff;
-    padding: 25px 15px;
-    text-align: center;
+header{
+    background:linear-gradient(90deg,var(--primary),var(--secondary));
+    padding:22px;
+    text-align:center;
 }
-
-header h1 {
-    font-size: 30px;
+header a{
+    color:#fff;
+    text-decoration:none;
 }
-
-header p {
-    margin-top: 8px;
-    font-size: 15px;
-    opacity: 0.95;
-}
+header h1{font-size:30px}
+header p{margin-top:6px;font-size:14px}
 
 /* NAV */
-nav {
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+nav{
+    background:#fff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+.nav-links a{
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--secondary);
+    font-weight:600;
+}
+.nav-links a:hover{background:var(--light)}
+
+/* HAMBURGER */
+.menu-btn{
+    display:none;
+    font-size:26px;
+    cursor:pointer;
+    color:var(--secondary);
 }
 
-nav a {
-    padding: 14px 18px;
-    color: var(--secondary);
-    text-decoration: none;
-    font-weight: 600;
+/* DRAWER */
+.drawer{
+    position:fixed;
+    top:0;
+    right:-260px;
+    width:260px;
+    height:100%;
+    background:#fff;
+    box-shadow:-4px 0 12px rgba(0,0,0,.2);
+    padding-top:60px;
+    transition:.3s;
+    z-index:100;
 }
-
-nav a:hover {
-    background: var(--light);
+.drawer a{
+    display:block;
+    padding:15px 20px;
+    color:var(--secondary);
+    text-decoration:none;
+    font-weight:600;
 }
+.drawer a:hover{background:var(--light)}
+.drawer.active{right:0}
 
 /* HERO */
-.hero {
-    background: var(--light);
-    padding: 70px 20px;
-    text-align: center;
+.hero{
+    background:var(--light);
+    padding:70px 20px;
+    text-align:center;
 }
-
-.hero h2 {
-    font-size: 28px;
-    color: var(--secondary);
-}
-
-.hero p {
-    max-width: 720px;
-    margin: 15px auto;
-    font-size: 16px;
-}
+.hero h2{color:var(--secondary);font-size:28px}
+.hero p{max-width:720px;margin:15px auto}
 
 /* SECTION */
-section {
-    max-width: 1200px;
-    margin: auto;
-    padding: 60px 20px;
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px;
 }
-
-section h2 {
-    text-align: center;
-    color: var(--secondary);
-    margin-bottom: 40px;
-    font-size: 26px;
-}
-
-/* ABOUT */
-.about p {
-    max-width: 900px;
-    margin: auto;
-    text-align: center;
-    font-size: 16px;
+section h2{
+    text-align:center;
+    color:var(--secondary);
+    margin-bottom:40px;
 }
 
 /* SERVICES */
-.services-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
-
-.service-card {
-    background: #fff;
-    padding: 30px 20px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: 0.3s;
+.service-card{
+    background:#fff;
+    padding:28px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    text-align:center;
 }
-
-.service-card:hover {
-    transform: translateY(-6px);
-}
-
-.service-card h3 {
-    color: var(--primary);
-    margin-bottom: 10px;
-}
+.service-card h3{color:var(--primary)}
 
 /* CONTACT */
-.contact-box {
-    background: var(--light);
-    padding: 35px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.contact-box p {
-    margin: 10px 0;
+.contact-box{
+    background:var(--light);
+    padding:35px;
+    border-radius:12px;
+    text-align:center;
 }
 
 /* FOOTER */
-footer {
-    background: var(--secondary);
-    color: #fff;
-    text-align: center;
-    padding: 15px;
-    font-size: 14px;
+footer{
+    background:var(--secondary);
+    color:#fff;
+    text-align:center;
+    padding:15px;
 }
 
-/* WHATSAPP BUTTON */
-.whatsapp-btn {
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    background: #25D366;
-    color: white;
-    padding: 14px 16px;
-    border-radius: 50%;
-    font-size: 22px;
-    text-decoration: none;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-    z-index: 100;
+/* FLOATING BUTTONS */
+.float-wrap{
+    position:fixed;
+    right:15px;
+    bottom:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    z-index:200;
 }
+.float-btn{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    border-radius:30px;
+    color:#fff;
+    text-decoration:none;
+    font-weight:600;
+    box-shadow:0 6px 15px rgba(0,0,0,.3);
+}
+.call{background:#0d6efd}
+.whatsapp{background:#25D366}
 
 /* RESPONSIVE */
-@media (max-width: 900px) {
-    .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+@media(max-width:900px){
+    .services-grid{grid-template-columns:repeat(2,1fr)}
 }
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 24px;
-    }
-
-    .hero h2 {
-        font-size: 22px;
-    }
-
-    nav {
-        flex-direction: column;
-    }
-
-    .services-grid {
-        grid-template-columns: 1fr;
-    }
-
-    section {
-        padding: 45px 15px;
-    }
+@media(max-width:600px){
+    .nav-links{display:none}
+    .menu-btn{display:block}
+    .services-grid{grid-template-columns:1fr}
+    header h1{font-size:24px}
 }
 </style>
 </head>
 
-<body>
+<body id="home">
 
 <header>
-    <h1>Radiovision Diagnostic Centre</h1>
-    <p>Advanced Imaging • Accurate Reports • Trusted Care</p>
+    <a href="#home">
+        <h1>Radiovision Diagnostic Centre</h1>
+        <p>Advanced Imaging • Accurate Reports • Trusted Care</p>
+    </a>
 </header>
 
 <nav>
-    <a href="#about">About</a>
-    <a href="#services">Services</a>
-    <a href="#contact">Contact</a>
+    <div class="menu-btn" onclick="toggleDrawer()">☰</div>
+    <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </div>
 </nav>
+
+<!-- DRAWER MENU -->
+<div class="drawer" id="drawer">
+    <a href="#about" onclick="toggleDrawer()">About</a>
+    <a href="#services" onclick="toggleDrawer()">Services</a>
+    <a href="#contact" onclick="toggleDrawer()">Contact</a>
+</div>
 
 <div class="hero">
     <h2>Reliable Diagnostic & Imaging Services</h2>
-    <p>
-        We deliver precise diagnostic results using modern technology
-        and experienced medical professionals.
-    </p>
+    <p>Precise diagnostic solutions using modern technology and expert care.</p>
 </div>
 
-<section id="about" class="about">
+<section id="about">
     <h2>About Radiovision</h2>
-    <p>
-        Radiovision Diagnostic Centre offers comprehensive imaging and
-        pathology services including MRI, CT Scan, Digital X-Ray,
-        Ultrasound and preventive health packages with patient-first care.
+    <p style="text-align:center;max-width:900px;margin:auto">
+        Radiovision Diagnostic Centre provides MRI, CT Scan, Digital X-Ray,
+        Ultrasound and Pathology services with focus on accuracy and patient care.
     </p>
 </section>
 
 <section id="services">
     <h2>Our Services</h2>
-
     <div class="services-grid">
-        <div class="service-card">
-            <h3>MRI Scan</h3>
-            <p>High quality MRI imaging with accurate reporting.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>CT Scan</h3>
-            <p>Fast and advanced CT scan services.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Digital X-Ray</h3>
-            <p>Low radiation, instant digital reports.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Ultrasound</h3>
-            <p>Safe and reliable ultrasound diagnostics.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Pathology Lab</h3>
-            <p>Complete lab testing with quick turnaround.</p>
-        </div>
-
-        <div class="service-card">
-            <h3>Health Packages</h3>
-            <p>Preventive health checkup solutions.</p>
-        </div>
+        <div class="service-card"><h3>MRI Scan</h3><p>High resolution MRI imaging.</p></div>
+        <div class="service-card"><h3>CT Scan</h3><p>Fast & accurate CT scans.</p></div>
+        <div class="service-card"><h3>Digital X-Ray</h3><p>Instant digital reports.</p></div>
+        <div class="service-card"><h3>Ultrasound</h3><p>Safe diagnostic imaging.</p></div>
+        <div class="service-card"><h3>Pathology</h3><p>Complete lab testing.</p></div>
+        <div class="service-card"><h3>Health Packages</h3><p>Preventive checkups.</p></div>
     </div>
 </section>
 
 <section id="contact">
     <h2>Contact Us</h2>
-
     <div class="contact-box">
-        <p><strong>📍 Address:</strong> Aundh, Pune</p>
-        <p><strong>📞 Phone:</strong> +91-XXXXXXXXXX</p>
-        <p><strong>✉ Email:</strong> info@radiovisiondiagnostics.com</p>
-        <p><strong>⏰ Timing:</strong> Mon-Sun | 8 AM – 12 AM</p>
+        <p><b>📍 Address:</b> Aundh, Pune</p>
+        <p><b>📞 Phone:</b> +91-XXXXXXXXXX</p>
+        <p><b>✉ Email:</b> info@radiovisiondiagnostics.com</p>
+        <p><b>⏰ Timing:</b> Mon–Sun | 8 AM – 12 AM</p>
     </div>
 </section>
 
 <footer>
-    © 2026 Radiovision Diagnostic Centre. All Rights Reserved.
+    © 2026 Radiovision Diagnostic Centre
 </footer>
 
-<!-- WhatsApp Button -->
-<a class="whatsapp-btn"
-   href="https://wa.me/91XXXXXXXXXX"
-   target="_blank"
-   title="Chat on WhatsApp">
-    🟢
-</a>
+<!-- FLOATING CALL & WHATSAPP -->
+<div class="float-wrap">
+    <a href="tel:+91XXXXXXXXXX" class="float-btn call">📞 Call Now</a>
+    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="float-btn whatsapp">💬 WhatsApp</a>
+</div>
+
+<script>
+function toggleDrawer(){
+    document.getElementById("drawer").classList.toggle("active");
+}
+</script>
 
 </body>
 </html>
