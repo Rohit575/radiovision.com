@@ -297,6 +297,10 @@ footer{
                 <label for="appointmentDateTime">Date & Time</label>
                 <input id="appointmentDateTime" name="datetime" type="datetime-local" required>
             </div>
+            <div>
+                <label for="contactNumber">Contact Number</label>
+                <input id="contactNumber" name="contact" type="tel" placeholder="Eg. +91XXXXXXXXXX" required>
+            </div>
             <div class="full">
                 <label for="appointmentType">Appointment</label>
                 <input id="appointmentType" name="appointment" type="text" placeholder="Eg. MRI Scan" required>
@@ -327,11 +331,11 @@ footer{
 
 <div class="float-wrap">
     <a href="tel:+91XXXXXXXXXX" class="float-btn call">📞 Call Now</a>
-    <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="float-btn whatsapp">💬 WhatsApp</a>
+    <a href="https://wa.me/919518937958" target="_blank" class="float-btn whatsapp">💬 WhatsApp</a>
 </div>
 
 <script>
-const WHATSAPP_NUMBER = "91XXXXXXXXXX";
+const WHATSAPP_NUMBER = "919518937958";
 
 function openDrawer(){
     document.getElementById("drawer").classList.add("active");
@@ -347,6 +351,7 @@ function buildWhatsAppMessage(entry){
         "*New Appointment Request*",
         `Name: ${entry.Name}`,
         `Date & Time: ${entry.DateTime}`,
+        `Contact Number: ${entry.Contact}`,
         `Appointment: ${entry.Appointment}`,
         `Remark: ${entry.Remark || "N/A"}`
     ].join("\n");
@@ -359,6 +364,7 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
     const entry = {
         Name: formData.get("name"),
         DateTime: formData.get("datetime"),
+        Contact: formData.get("contact"),
         Appointment: formData.get("appointment"),
         Remark: formData.get("remark")
     };
