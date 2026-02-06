@@ -121,6 +121,47 @@ section h2{
     margin-bottom:40px;
 }
 
+/* APPOINTMENT FORM */
+.appointment-wrap{
+    max-width:760px;
+    margin:0 auto;
+    background:#fff;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+.appointment-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+.appointment-form .full{grid-column:1 / -1}
+.appointment-form label{
+    display:block;
+    font-weight:600;
+    color:var(--secondary);
+    margin-bottom:6px;
+}
+.appointment-form input,
+.appointment-form textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #cfd8ea;
+    border-radius:8px;
+    font:inherit;
+}
+.appointment-form button{
+    border:none;
+    background:var(--primary);
+    color:#fff;
+    padding:13px 18px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+}
+.appointment-form button:hover{background:var(--secondary)}
+.status-msg{margin-top:12px;font-size:14px;color:#1e7e34}
+
 /* SERVICES */
 .services-grid{
     display:grid;
@@ -185,6 +226,7 @@ footer{
     .menu-btn{display:flex}
     .drawer{display:block}
     .services-grid{grid-template-columns:1fr}
+    .appointment-form{grid-template-columns:1fr}
     header h1{font-size:24px}
 }
 </style>
@@ -243,6 +285,34 @@ footer{
     </div>
 </section>
 
+<section id="appointment">
+    <h2>Book Appointment</h2>
+    <div class="appointment-wrap">
+        <form id="appointmentForm" class="appointment-form">
+            <div>
+                <label for="patientName">Name</label>
+                <input id="patientName" name="name" type="text" required>
+            </div>
+            <div>
+                <label for="appointmentDateTime">Date & Time</label>
+                <input id="appointmentDateTime" name="datetime" type="datetime-local" required>
+            </div>
+            <div class="full">
+                <label for="appointmentType">Appointment</label>
+                <input id="appointmentType" name="appointment" type="text" placeholder="Eg. MRI Scan" required>
+            </div>
+            <div class="full">
+                <label for="remark">Remark</label>
+                <textarea id="remark" name="remark" rows="4" placeholder="Any additional details"></textarea>
+            </div>
+            <div class="full">
+                <button type="submit">Book Appointment</button>
+                <p id="bookingStatus" class="status-msg" aria-live="polite"></p>
+            </div>
+        </form>
+    </div>
+</section>
+
 <section id="contact">
     <h2>Contact Us</h2>
     <div class="contact-box">
@@ -261,6 +331,8 @@ footer{
 </div>
 
 <script>
+const STORAGE_KEY = "radiovisionAppointments";
+
 function openDrawer(){
     document.getElementById("drawer").classList.add("active");
     document.getElementById("overlay").classList.add("active");
@@ -269,7 +341,43 @@ function closeDrawer(){
     document.getElementById("drawer").classList.remove("active");
     document.getElementById("overlay").classList.remove("active");
 }
+
+function loadAppointments(){
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+}
+
+function saveAppointments(rows){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
+}
+
+function exportAppointmentsToExcel(rows){
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Appointments");
+    XLSX.writeFile(workbook, "appointments.xlsx");
+}
+
+document.getElementById("appointmentForm").addEventListener("submit", function(event){
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const entry = {
+        Name: formData.get("name"),
+        DateTime: formData.get("datetime"),
+        Appointment: formData.get("appointment"),
+        Remark: formData.get("remark")
+    };
+
+    const appointments = loadAppointments();
+    appointments.push(entry);
+    saveAppointments(appointments);
+    exportAppointmentsToExcel(appointments);
+
+    document.getElementById("bookingStatus").textContent = "Appointment booked and saved to appointments.xlsx";
+    event.target.reset();
+});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 </body>
 </html>
