@@ -331,7 +331,7 @@ footer{
 </div>
 
 <script>
-const STORAGE_KEY = "radiovisionAppointments";
+const WHATSAPP_NUMBER = "91XXXXXXXXXX";
 
 function openDrawer(){
     document.getElementById("drawer").classList.add("active");
@@ -342,19 +342,14 @@ function closeDrawer(){
     document.getElementById("overlay").classList.remove("active");
 }
 
-function loadAppointments(){
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-}
-
-function saveAppointments(rows){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(rows));
-}
-
-function exportAppointmentsToExcel(rows){
-    const worksheet = XLSX.utils.json_to_sheet(rows);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Appointments");
-    XLSX.writeFile(workbook, "appointments.xlsx");
+function buildWhatsAppMessage(entry){
+    return [
+        "*New Appointment Request*",
+        `Name: ${entry.Name}`,
+        `Date & Time: ${entry.DateTime}`,
+        `Appointment: ${entry.Appointment}`,
+        `Remark: ${entry.Remark || "N/A"}`
+    ].join("\n");
 }
 
 document.getElementById("appointmentForm").addEventListener("submit", function(event){
@@ -368,16 +363,14 @@ document.getElementById("appointmentForm").addEventListener("submit", function(e
         Remark: formData.get("remark")
     };
 
-    const appointments = loadAppointments();
-    appointments.push(entry);
-    saveAppointments(appointments);
-    exportAppointmentsToExcel(appointments);
+    const message = encodeURIComponent(buildWhatsAppMessage(entry));
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
-    document.getElementById("bookingStatus").textContent = "Appointment booked and saved to appointments.xlsx";
+    window.open(whatsappUrl, "_blank");
+    document.getElementById("bookingStatus").textContent = "Appointment details sent to WhatsApp.";
     event.target.reset();
 });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
 </body>
 </html>
